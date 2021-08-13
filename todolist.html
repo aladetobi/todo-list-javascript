@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            height: 100%;
+            background-color: #111;
+        }
+        h1 {
+            font-size: 3rem;
+            text-align: center;
+            font-weight: 500;
+            color: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        h1 span {
+            color: lime;
+            font-weight: 800;
+        }
+
+        .input-div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        .input {
+            width: 450px;
+            height: 50px;
+            border-radius: 25px;
+            border: none;
+            outline: none;
+            padding: 0.5rem;
+            font-size: 1rem;
+        }
+        .addlist {
+            height: 50px;
+            width: 50px;
+            border-radius: 25px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            margin-left: 2rem;
+            background: lime;
+            color: #fff;
+            cursor: pointer;
+            user-select: none;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .item {
+            border-bottom: 4px solid #fff;
+            width: 500px;
+            padding: 0.7rem 0.5rem;
+            margin-bottom: 2rem;
+        }
+        .item-input {
+            background: none;
+            width: 300px;
+            border: none;
+            outline: none;
+            font-size: 2rem;
+            color: #fff;
+        }
+        .edit {
+            width: 60px;
+            text-transform: uppercase;
+            background: none;
+            color: lime;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            text-align: center;
+            font-size: 1rem;
+            padding:0.5rem 1rem;
+            user-select: none;
+        }
+        .remove {
+            width: 100px;
+            text-transform: uppercase;
+            background: none;
+            color: red;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            text-align: center;
+            font-size: 1rem;
+            padding:0.5rem 0.5rem;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <h1><span>Todo</span>List</h1>
+    <div class="input-div">
+        <input type="text" class="input" placeholder="What you want to do ...">
+        <button class="addlist">add</button>
+    </div>
+    <div class="container">
+        <!-- <div class="item">
+            <input type="text" class="item-input">
+            <button class="edit">Edit</button>
+            <button class="remove">Remove</button>
+        </div> -->
+    </div>
+
+    <script>
+        var add = document.querySelector(".addlist");
+        var input = document.querySelector(".input");
+        var container = document.querySelector(".container");
+
+
+        add.addEventListener("click", createList);
+        window.addEventListener("keypress", function(e){
+            if(e.which === 13){
+                createList();
+            }
+        })
+                
+
+
+
+
+
+
+
+
+        function createList() {
+            if(input.value != "") {
+                var itemInput = document.createElement("input");
+                itemInput.value = input.value;
+                itemInput.disabled = true;
+                itemInput.type = 'text';
+                itemInput.classList.add('item-input');
+
+
+                var edit = document.createElement("button");
+                edit.innerHTML = "EDIT";
+                edit.classList.add("edit");
+                
+                
+                var remove = document.createElement("button");
+                remove.innerHTML = "REMOVE";
+                remove.classList.add("remove");
+
+
+                var inputDiv = document.createElement("div");
+                inputDiv.classList.add("item");
+
+                container.appendChild(inputDiv);
+                inputDiv.appendChild(itemInput);
+                inputDiv.appendChild(edit);
+                inputDiv.appendChild(remove);
+
+                edit.addEventListener('click', function(){
+                    if(itemInput){
+                        itemInput.disabled = !itemInput.disabled;
+                    }  
+                });
+                remove.addEventListener('click', function(){
+                    container.removeChild(inputDiv);
+                });
+
+
+                input.value = "";
+
+                } 
+            }
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
